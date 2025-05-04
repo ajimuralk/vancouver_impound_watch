@@ -21,6 +21,7 @@ defmodule VancouverImpoundWatch.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:plug, "~> 1.17"},
       {:req, "~> 0.5.0"},
       {:tzdata, "~> 1.1"}
