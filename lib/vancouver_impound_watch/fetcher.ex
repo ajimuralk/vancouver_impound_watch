@@ -3,16 +3,17 @@ defmodule VancouverImpoundWatch.Fetcher do
   A module that makes requests to the Vancouver OpenData catalog for animal control inventory
   """
 
-  require Logger
-
   alias VancouverImpoundWatch.Pet
   alias VancouverImpoundWatch.Pet.Normalize
 
-  @typep http_status :: integer()
+  require Logger
 
+  @behaviour VancouverImpoundWatch.Fetcher.Behaviour
+
+  @impl VancouverImpoundWatch.Fetcher.Behaviour
   @spec get() ::
           {:ok, [Pet.t()]}
-          | {:error, {:unexpected_response, http_status()}}
+          | {:error, {:unexpected_response, integer()}}
           | {:error, String.t()}
   def get do
     [url: url(), method: :get, headers: [{"accept", "application/json"}]]

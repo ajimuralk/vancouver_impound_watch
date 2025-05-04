@@ -23,6 +23,7 @@ defmodule VancouverImpoundWatch.Pet.Normalize do
          color: convert_string(raw["color"]),
          date_impounded: date_impounded,
          disposition_date: parse_date(raw["dispositiondate"]),
+         last_updated: Date.utc_today(),
          name: convert_string(raw["name"]),
          pit_number: convert_string(raw["pitnumber"]),
          kennel_number: convert_string(raw["kennelnumber"]),
@@ -68,7 +69,15 @@ defmodule VancouverImpoundWatch.Pet.Normalize do
   defp convert_string(s) when is_binary(s), do: s
   defp convert_string(_), do: nil
 
-  defp convert_required_string(s) when is_binary(s), do: {:ok, s}
+  defp convert_string_int(s) when is_binary(s) do
+    {int, _} = Integer.parse(s)
+    int
+  end
+
+  defp convert_string_int(s) when is_number(s), do: s
+  defp convert_string_int(_), do: nil
+
+  defp convert_required_string(s) when is_binary(s), do: {:ok, String.downcase(s)}
   defp convert_required_string(_), do: {:error, :missing_or_invalid_string}
 
   defp convert_source(source) when is_binary(source) do
@@ -112,12 +121,4 @@ defmodule VancouverImpoundWatch.Pet.Normalize do
   end
 
   defp parse_id(_), do: {:error, :missing_or_invalid_id}
-
-  defp convert_string_int(s) when is_binary(s) do
-    {int, _} = Integer.parse(s)
-    int
-  end
-
-  defp convert_string_int(s) when is_number(s), do: s
-  defp convert_string_int(_), do: nil
 end
