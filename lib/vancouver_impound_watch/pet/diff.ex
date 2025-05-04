@@ -22,7 +22,7 @@ defmodule VancouverImpoundWatch.Pet.Diff do
   end
 
   defp compare_fields(existing, new) do
-    Map.take(existing, [@actionable_changes]) ==
-      Map.take(new, [@actionable_changes])
+    Map.take(existing, @actionable_changes) ==
+      Map.take(new, @actionable_changes)
   end
 end
