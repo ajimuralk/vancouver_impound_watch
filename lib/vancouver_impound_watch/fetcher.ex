@@ -2,13 +2,13 @@ defmodule VancouverImpoundWatch.Fetcher do
   @moduledoc """
   A module that makes requests to the Vancouver OpenData catalog for animal control inventory
   """
+  @behaviour VancouverImpoundWatch.Fetcher.Behaviour
 
   alias VancouverImpoundWatch.Pet
   alias VancouverImpoundWatch.Pet.Normalize
 
   require Logger
 
-  @behaviour VancouverImpoundWatch.Fetcher.Behaviour
 
   @impl VancouverImpoundWatch.Fetcher.Behaviour
   @spec get() ::
