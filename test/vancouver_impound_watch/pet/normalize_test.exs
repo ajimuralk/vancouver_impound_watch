@@ -35,17 +35,18 @@ defmodule VancouverImpoundWatch.Pet.NormalizeTest do
                 age_category: :young_adult,
                 id: 35_319,
                 approx_weight: 9,
-                breed: "Korean Village Dog",
+                breed: "korean village dog",
                 code: :green,
                 color: "White",
                 date_impounded: Date.new!(2025, 4, 14),
                 disposition_date: Date.new!(2025, 4, 14),
                 kennel_number: "200",
+                last_updated: Date.utc_today(),
                 name: "Levi",
                 pit_number: "1",
                 sex: :male_neutered,
                 source: :holding_stray,
-                status: "Owners contacted and on their way"
+                status: "owners contacted and on their way"
               }} == Normalize.from_map(raw_map)
     end
 

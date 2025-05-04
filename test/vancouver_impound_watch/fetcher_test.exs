@@ -1,4 +1,7 @@
 defmodule VancouverImpoundWatch.FetcherTest do
+  @moduledoc """
+  Test for fetching and resolving API expected and malformed data.
+  """
   use ExUnit.Case, async: true
 
   import ExUnit.CaptureLog
