@@ -79,7 +79,7 @@ defmodule VancouverImpoundWatch.Scheduler do
           Logger.info("New pet registered: #{inspect(incoming_pet)}")
 
         :updated ->
-          # TODO: check status, publish update, purge from cache on certain updates
+          # TODO: check status, publish update
           RegisteredPetTable.insert(incoming_pet)
           Logger.info("Registered pet updated: #{inspect(incoming_pet)}")
 

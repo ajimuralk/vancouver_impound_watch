@@ -19,12 +19,14 @@ defmodule VancouverImpoundWatch.Pet.PolicyTest do
     end
 
     test "it returns ids for pets with terminal statuses" do
-      {terminal_id_1, _} = terminal_pet_1 = pet(1, "redeemed", Date.utc_today())
-      {terminal_id_2, _} = terminal_pet_2 = pet(2, "ride home free", Date.utc_today())
-      {terminal_id_3, _} = terminal_pet_3 = pet(3, "deceased", Date.utc_today())
-      {terminal_id_4, _} = terminal_pet_4 = pet(4, "released", Date.utc_today())
-      {terminal_id_5, _} = terminal_pet_5 = pet(5, "sold", Date.utc_today())
-      {valid_id, _} = valid_pet = pet(6, "reported", Date.utc_today())
+      today = Date.utc_today()
+
+      {terminal_id_1, _} = terminal_pet_1 = pet(1, "redeemed", today)
+      {terminal_id_2, _} = terminal_pet_2 = pet(2, "ride home free", today)
+      {terminal_id_3, _} = terminal_pet_3 = pet(3, "deceased", today)
+      {terminal_id_4, _} = terminal_pet_4 = pet(4, "released", today)
+      {terminal_id_5, _} = terminal_pet_5 = pet(5, "sold", today)
+      {valid_id, _} = valid_pet = pet(6, "reported", today)
 
       terminal_ids =
         Policy.pets_to_evict([

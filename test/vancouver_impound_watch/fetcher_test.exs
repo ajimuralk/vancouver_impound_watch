@@ -109,11 +109,13 @@ defmodule VancouverImpoundWatch.FetcherTest do
           "receiptnumber" => nil,
           "sex" => "X",
           "source" => "BROUGHT-IN",
+          # missing status
           "status" => nil
         },
         %{
           "aco" => nil,
           "age_category" => nil,
+          # malformed id
           "animalid" => "invalid-id",
           "approxweight" => nil,
           "breed" => "Dove",

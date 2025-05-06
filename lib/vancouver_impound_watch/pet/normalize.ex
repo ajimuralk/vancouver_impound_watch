@@ -5,7 +5,7 @@ defmodule VancouverImpoundWatch.Pet.Normalize do
 
   alias VancouverImpoundWatch.Pet
 
-  @spec from_map(map()) :: {:ok, Pet.t()} | {:error | String.t()}
+  @spec from_map(map()) :: {:ok, Pet.t()} | {:error, any()}
   def from_map(raw) do
     with {:ok, id} <- parse_id(raw["animalid"]),
          {:ok, breed} <- convert_required_string(raw["breed"]),

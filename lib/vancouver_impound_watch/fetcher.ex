@@ -9,7 +9,6 @@ defmodule VancouverImpoundWatch.Fetcher do
 
   require Logger
 
-
   @impl VancouverImpoundWatch.Fetcher.Behaviour
   @spec get() ::
           {:ok, [Pet.t()]}
