@@ -11,8 +11,8 @@ defmodule VancouverImpoundWatch.Scheduler do
 
   require Logger
 
+  @cleanup_interval 3600 * 24 * 1000
   @one_hour_in_secs 3600
-  @one_day_in_secs 3600 * 24
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, opts, name: __MODULE__)
@@ -20,23 +20,19 @@ defmodule VancouverImpoundWatch.Scheduler do
 
   @impl true
   def init(opts) do
-    cleanup_ref = Process.send_after(self(), :cleanup_cache, @one_day_in_secs)
-    fetch_interval_secs = Keyword.get(opts, :fetch_interval_secs, @one_hour_in_secs)
+    mod = Keyword.get(opts, :fetcher, Fetcher)
+    fetch_interval = Keyword.get(opts, :fetch_interval_secs, @one_hour_in_secs) * 1000
+
+    cleanup_ref = Process.send_after(self(), :cleanup_cache, @cleanup_interval)
 
     fetch_ref =
-      Process.send_after(
-        self(),
-        :fetch,
-        fetch_interval_secs
-      )
-
-    mod = Keyword.get(opts, :fetcher, Fetcher)
+      Process.send(self(), :fetch, [])
 
     {:ok,
      %{
        cleanup_cache_timer: cleanup_ref,
        fetcher: mod,
-       fetch_interval_secs: fetch_interval_secs,
+       fetch_interval: fetch_interval,
        fetch_timer: fetch_ref
      }}
   end
@@ -47,7 +43,7 @@ defmodule VancouverImpoundWatch.Scheduler do
     |> Policy.pets_to_evict()
     |> Enum.each(&RegisteredPetTable.evict/1)
 
-    cleanup_ref = Process.send_after(self(), :cleanup_cache, @one_day_in_secs)
+    cleanup_ref = Process.send_after(self(), :cleanup_cache, @cleanup_interval)
     {:noreply, %{state | cleanup_cache_timer: cleanup_ref}}
   end
 
@@ -65,7 +61,7 @@ defmodule VancouverImpoundWatch.Scheduler do
         error
     end
 
-    fetch_ref = Process.send_after(self(), :fetch, state.fetch_interval_secs)
+    fetch_ref = Process.send_after(self(), :fetch, state.fetch_interval)
 
     {:noreply, %{state | fetch_timer: fetch_ref}}
   end

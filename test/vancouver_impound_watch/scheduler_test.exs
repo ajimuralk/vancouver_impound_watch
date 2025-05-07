@@ -28,8 +28,8 @@ defmodule VancouverImpoundWatch.SchedulerTest do
       {:ok, pid} =
         Scheduler.start_link(
           fetcher: MockFetcher,
-          # effectively disables auto-fetch
-          fetch_interval_secs: 100_000
+          # effectively disables auto-fetch in test
+          fetch_interval_in_secs: 1_000_000
         )
 
       MockFetcher.set_pets([pet1(), pet2()])
