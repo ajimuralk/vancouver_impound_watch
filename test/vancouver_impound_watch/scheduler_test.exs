@@ -79,7 +79,7 @@ defmodule VancouverImpoundWatch.SchedulerTest do
     %VancouverImpoundWatch.Pet{
       aco: "43",
       age_category: :adult,
-      id: 35320,
+      id: 35_320,
       approx_weight: nil,
       breed: "yorkie",
       code: nil,
@@ -100,7 +100,7 @@ defmodule VancouverImpoundWatch.SchedulerTest do
     %VancouverImpoundWatch.Pet{
       aco: "43",
       age_category: :adult,
-      id: 35320,
+      id: 35_320,
       approx_weight: nil,
       breed: "yorkie",
       code: nil,
@@ -121,7 +121,7 @@ defmodule VancouverImpoundWatch.SchedulerTest do
     %VancouverImpoundWatch.Pet{
       aco: "40",
       age_category: :adult,
-      id: 35322,
+      id: 35_322,
       approx_weight: nil,
       breed: "miniature poodle",
       code: nil,
@@ -142,7 +142,7 @@ defmodule VancouverImpoundWatch.SchedulerTest do
     %VancouverImpoundWatch.Pet{
       aco: "40",
       age_category: :adult,
-      id: 35322,
+      id: 35_322,
       approx_weight: nil,
       breed: "miniature poodle",
       code: nil,

@@ -23,6 +23,7 @@ defmodule VancouverImpoundWatch.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:plug, "~> 1.17"},
       {:req, "~> 0.5.0"},

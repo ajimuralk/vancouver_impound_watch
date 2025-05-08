@@ -9,10 +9,10 @@ defmodule VancouverImpoundWatch.Pet.Diff do
 
   @actionable_changes [:status, :disposition_date]
 
-  @spec compare(%Pet{} | nil, %Pet{}) :: diff_status
+  @spec compare(Pet.t() | nil, Pet.t()) :: diff_status
   def compare(nil, _new), do: :new
 
-  @spec compare(%Pet{}, %Pet{}) :: diff_status
+  @spec compare(Pet.t(), Pet.t()) :: diff_status
   def compare(existing, new) do
     if compare_fields(existing, new) do
       :unchanged
