@@ -4,7 +4,7 @@ defmodule VancouverImpoundWatch.Pet.Policy do
   """
   alias VancouverImpoundWatch.Pet
 
-  @holding_period_in_days 6
+  @holding_period_in_days 5
   @terminal_statuses ["redeemed", "deceased", "released", "sold", "ride home free"]
 
   @spec pets_to_evict([{integer(), Pet.t()}]) :: [integer()]
